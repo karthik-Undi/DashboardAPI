@@ -41,7 +41,7 @@ namespace DashboardAPI.Repositories
                 post = new DashBoardPosts() {
                     DashBody = item.DashBody,
                     DashIntendedFor = item.DashIntendedFor,
-                    DashTime = item.DashTime,
+                    DashTime = DateTime.Now,
                     DashTitle = item.DashTitle,
                     DashType = item.DashType,
                     ResidentId = item.ResidentId
@@ -72,10 +72,8 @@ namespace DashboardAPI.Repositories
             DashBoardPosts tempPost = await _context.DashBoardPosts.FindAsync(id);
             tempPost.DashBody = item.DashBody;
             tempPost.DashIntendedFor = item.DashIntendedFor;
-            tempPost.DashTime = DateTime.Now;
             tempPost.DashTitle = item.DashTitle; 
             tempPost.DashType = item.DashType;
-            tempPost.ResidentId = item.ResidentId;
             await _context.SaveChangesAsync();
 
             return tempPost;

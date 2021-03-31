@@ -57,5 +57,45 @@ namespace DashboardAPI.Controllers
             return Ok(addPost);
         }
 
+        [HttpPost("{id}")]
+        public async Task<IActionResult> UpdateDashboardPost(DashBoardPosts item, int id)
+        {
+            _log4net.Info("UpdateDashboardPost Was Called !!");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var newpost = await _context.UpdatePost(item, id);
+                _log4net.Info("UpdateDashboardPost with Id " + id + " Was Called !!");
+                return Ok(newpost);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("delete/{id}")]
+        public async Task<IActionResult> DeletePost(int id)
+        {
+            _log4net.Info("DeletePost Was Called !!");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var deletedpost = await _context.RemovePost(id);
+                _log4net.Info("DeletePost with Id " + id + " Was Called !!");
+                return Ok(deletedpost);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
     }
 }
