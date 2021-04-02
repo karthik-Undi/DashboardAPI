@@ -24,37 +24,50 @@ namespace DashboardAPI.Controllers
         [HttpGet]
         public IEnumerable<DashBoardPosts> GetAllPosts()
         {
-            _log4net.Info("Get All Posts is Called !!");
+            _log4net.Info("Get All Posts Was Called !!");
             return _context.GetAllPosts();
         }
         [HttpGet("{id}")]
         public IActionResult GetPostById(int id)
         {
-            _log4net.Info("Get Post By ID is Called !!");
+            _log4net.Info("Get Post By ID Was Called !!");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            var Post = _context.GetPostById(id);
-            _log4net.Info("Post of Id " + id + " is called");
-            if (Post == null)
+            try
             {
-                return NotFound();
+                var Post = _context.GetPostById(id);
+                _log4net.Info("Post of Id " + id + " is called");
+                if (Post == null)
+                {
+                    return NotFound();
+                }
+                return Ok(Post);
             }
-            return Ok(Post);
+            catch(Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> PostDashboardPost(DashBoardPosts item)
         {
-            _log4net.Info("PostDashboardPosts is called !!");
+            _log4net.Info("PostDashboardPosts Was Called !!");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var addPost = await _context.PostDashBoardPosts(item);
-            return Ok(addPost);
+            try
+            {
+                var addPost = await _context.PostDashBoardPosts(item);
+                return Ok(addPost);
+            }
+            catch(Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPost("{id}")]
