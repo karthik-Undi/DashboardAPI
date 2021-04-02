@@ -44,7 +44,9 @@ namespace DashboardAPI.Repositories
                     DashTime = DateTime.Now,
                     DashTitle = item.DashTitle,
                     DashType = item.DashType,
-                    ResidentId = item.ResidentId
+                    ResidentId = item.ResidentId,
+                    ResidentName=item.ResidentName
+                    
                 };
                 await _context.DashBoardPosts.AddAsync(post);
                 await _context.SaveChangesAsync();

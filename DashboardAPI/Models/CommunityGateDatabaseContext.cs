@@ -68,9 +68,7 @@ namespace DashboardAPI.Models
 
                 entity.Property(e => e.DashItemId).HasColumnName("DashItemID");
 
-                entity.Property(e => e.DashBody)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.DashBody).IsUnicode(false);
 
                 entity.Property(e => e.DashIntendedFor)
                     .HasMaxLength(50)
@@ -87,6 +85,10 @@ namespace DashboardAPI.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.ResidentId).HasColumnName("ResidentID");
+
+                entity.Property(e => e.ResidentName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Resident)
                     .WithMany(p => p.DashBoardPosts)
@@ -151,9 +153,7 @@ namespace DashboardAPI.Models
             {
                 entity.HasKey(e => e.HouseId);
 
-                entity.Property(e => e.HouseId)
-                    .HasColumnName("HouseID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.HouseId).HasColumnName("HouseID");
 
                 entity.Property(e => e.IsFree)
                     .HasColumnName("isFree")
