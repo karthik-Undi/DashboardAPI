@@ -90,7 +90,7 @@ namespace DashboardAPI.Controllers
             }
         }
 
-        [HttpPost("delete/{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeletePost(int id)
         {
             _log4net.Info("DeletePost Was Called !!");
