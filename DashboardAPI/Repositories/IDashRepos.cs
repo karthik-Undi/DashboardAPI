@@ -13,6 +13,7 @@ namespace DashboardAPI.Repositories
         public Task<DashBoardPosts> PostDashBoardPosts(DashBoardPosts item);
         public Task<DashBoardPosts> RemovePost(int id);
         public Task<DashBoardPosts> UpdatePost(DashBoardPosts item, int id);
+        IEnumerable<DashBoardPosts> GetDashBoardPostsByResidentId(int id);
 
 
 

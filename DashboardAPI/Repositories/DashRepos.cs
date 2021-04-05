@@ -29,6 +29,12 @@ namespace DashboardAPI.Repositories
             return item;
         }
 
+        public IEnumerable<DashBoardPosts> GetDashBoardPostsByResidentId(int id)
+        {
+            var item = _context.DashBoardPosts.Where(post => post.ResidentId == id).ToList();
+            return item;
+        }
+
         public async Task<DashBoardPosts> PostDashBoardPosts(DashBoardPosts item)
         {
             DashBoardPosts post = null;

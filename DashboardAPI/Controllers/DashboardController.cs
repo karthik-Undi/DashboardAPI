@@ -45,12 +45,34 @@ namespace DashboardAPI.Controllers
                 }
                 return Ok(Post);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return BadRequest();
             }
         }
-
+        [HttpGet("GetPostsByResidentId/{id}")]
+        public IActionResult GetDashBoardPostsByResidentId(int id)
+        {
+            _log4net.Info("Get DashBoard Posts By Resident ID Was Called !!");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var dashboardPosts = _context.GetDashBoardPostsByResidentId(id);
+                _log4net.Info("DashBoard Posts Of Resident Id " + id + " Was Called");
+                if (dashboardPosts == null)
+                {
+                    return NotFound();
+                }
+                return Ok(dashboardPosts);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
         [HttpPost]
         public async Task<IActionResult> PostDashboardPost(DashBoardPosts item)
         {
